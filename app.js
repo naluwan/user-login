@@ -5,12 +5,17 @@ const hbs = require('express-handlebars')
 const bodyParser = require('body-parser')
 const User = require('./models/user')
 const routes = require('./routes')
+const cookieParser = require('cookie-parser')
 
 app.engine('hbs', hbs({ defaultLayout: 'main', extname: '.hbs' }))
 app.set('view engine', 'hbs')
 
 require('./config/mongoose')
-app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }))
+
+
+app.use(cookieParser('naluwan'))
 app.use(routes)
 
 app.listen(port, () => {

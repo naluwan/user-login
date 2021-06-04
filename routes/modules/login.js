@@ -1,8 +1,10 @@
 const express = require('express')
 const router = express.Router()
 const User = require('../../models/user')
+let isLogin = false
 
-router.post('/', (req, res) => {
+router.post('/login', (req, res) => {
+  isLogin = false
   const { inputAccount, inputPassword } = req.body
   if (!inputAccount || !inputPassword) {
     const inputEmpty = 'Please enter Account and Password!'
@@ -23,8 +25,18 @@ router.post('/', (req, res) => {
         res.render('index', { noResult, inputAccount })
         return
       }
-      res.render('welcome', { name: user.firstName })
+      isLogin = true
+      res.cookie('userName', user.firstName, { signed: true, maxAge: 120000 })
+      res.cookie('userEmail', user.email, { signed: true, maxAge: 120000 })
+      res.render('welcome', { name: user.firstName, isLogin })
     }).catch(error => console.log(error))
+})
+
+router.get('/loginout', (req, res) => {
+  res.clearCookie('userName')
+  res.clearCookie('userEmail')
+
+  return res.redirect('/')
 })
 
 module.exports = router

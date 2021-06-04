@@ -5,9 +5,11 @@ A simple login website built with Node.js and Express
 * Check account and password
 * Show the message of empty account or password
 * Show the message of wrong password or account does not exist
+* make user keeping connected by 2 minutes
 
 ![image](login.png)
 ![image](welcome.png)
+![image](keepingConnect.png)
 
 # Getting Started
 Clone respository to your local computer
@@ -39,6 +41,7 @@ http://localhost:3000
 * Express: 4.17.1
 * Express-Handlebars: 5.3.2
 * mongoose: 5.12.12
+* cookie-parser: 1.4.5
 
 # Author
 NaLuWan 簡碩亨
