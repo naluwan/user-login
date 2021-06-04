@@ -1,1 +1,30 @@
-<h2>This will be login page</h2>
+<div class="container mt-5">
+  <div class="row mx-auto justify-content-center">
+    <div class="col-6 my-5">
+      <div style="border-radius: 40px; border: 2px solid black;">
+        <form action="/login" method="POST" class="col-12 p-5">
+          <div class="form-group">
+            <label for="inputAccount">Account</label>
+            <input type="email" class="form-control" id="inputAccount" aria-describedby="emailHelp"
+              placeholder="Enter your email" name="inputAccount">
+          </div>
+          <div class="form-group">
+            <label for="inputPassword">Password</label>
+            <input type="password" class="form-control" id="inputPassword" placeholder="Password" name="inputPassword">
+          </div>
+          <div class="mb-3">
+            {{#if inputEmpty}}
+            <small class="text-danger">{{ inputEmpty }}</small>
+            {{/if}}
+          </div>
+          <div class="mb-3">
+            {{#if noResult}}
+            <small class="text-danger">{{ noResult }}</small>
+            {{/if}}
+          </div>
+          <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
