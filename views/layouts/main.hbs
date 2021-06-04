@@ -12,6 +12,9 @@
   <header>
     <nav class="navbar navbar-dark bg-primary">
       <a class="navbar-brand" href="/">Home</a>
+      {{#if isLogin}}
+      <a class="btn btn-outline-light" href="/cookies/loginout">Login Out</a>
+      {{/if}}
     </nav>
   </header>
 
