@@ -6,6 +6,7 @@ const hbs = require('express-handlebars')
 app.engine('hbs', hbs({ defaultLayout: 'main', extname: '.hbs' }))
 app.set('view engine', 'hbs')
 
+require('./config/mongoose')
 
 
 app.get('/', (req, res) => {
