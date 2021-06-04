@@ -4,44 +4,14 @@ const port = 3000
 const hbs = require('express-handlebars')
 const bodyParser = require('body-parser')
 const User = require('./models/user')
+const routes = require('./routes')
 
 app.engine('hbs', hbs({ defaultLayout: 'main', extname: '.hbs' }))
 app.set('view engine', 'hbs')
 
 require('./config/mongoose')
 app.use(bodyParser.urlencoded({ extended: true }))
-
-app.get('/', (req, res) => {
-  res.render('index')
-})
-
-app.post('/login', (req, res) => {
-  const { inputAccount, inputPassword } = req.body
-  if (!inputAccount || !inputPassword) {
-    const inputEmpty = 'Please enter Account and Password!'
-    res.render('index', { inputEmpty, inputAccount })
-    return
-  }
-
-  User.findOne({ email: inputAccount })
-    .lean()
-    .then(user => {
-      if (!user) {
-        const noResult = 'Account does not exist! Please try again!'
-        res.render('index', { noResult, inputAccount })
-        return
-      }
-      if (user.password !== inputPassword) {
-        const noResult = 'Wrong Password! Please try again!'
-        res.render('index', { noResult, inputAccount })
-        return
-      }
-      res.render('welcome', { name: user.firstName })
-    }).catch(error => console.log(error))
-})
-
-
-
+app.use(routes)
 
 app.listen(port, () => {
   console.log(`Express is running on http://localhost:${port}`)
