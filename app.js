@@ -19,7 +19,7 @@ app.post('/login', (req, res) => {
   const { inputAccount, inputPassword } = req.body
   if (!inputAccount || !inputPassword) {
     const inputEmpty = 'Please enter Account and Password!'
-    res.render('index', { inputEmpty })
+    res.render('index', { inputEmpty, inputAccount })
     return
   }
 
@@ -28,12 +28,12 @@ app.post('/login', (req, res) => {
     .then(user => {
       if (!user) {
         const noResult = 'Account does not exist! Please try again!'
-        res.render('index', { noResult })
+        res.render('index', { noResult, inputAccount })
         return
       }
       if (user.password !== inputPassword) {
         const noResult = 'Wrong Password! Please try again!'
-        res.render('index', { noResult })
+        res.render('index', { noResult, inputAccount })
         return
       }
       res.render('welcome', { name: user.firstName })
